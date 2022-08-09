@@ -1,81 +1,59 @@
-package DataObject;
+package dataObject;
 
-import java.time.LocalDateTime;
+import com.opencsv.bean.CsvBindByPosition;
 
 /**
- * Record with appropriate data type
- * TODO potential builder pattern
+ * For storing the primitive data parsed from the CSV file
  */
-public class TravelRecord {
+public class RawRecord {
 
-    private int id;
+    @CsvBindByPosition(position = 0)
+    private String id;
 
-    private LocalDateTime dateTimeUTC;
+    @CsvBindByPosition(position = 1)
+    private String dateTimeUTC;
 
-    private Tap tapType;
+    @CsvBindByPosition(position = 2)
+    private String tapType;
 
+    @CsvBindByPosition(position = 3)
     private String stopId;
 
+    @CsvBindByPosition(position = 4)
     private String companyId;
 
+    @CsvBindByPosition(position = 5)
     private String busID;
 
+    @CsvBindByPosition(position = 6)
     private String pan;
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public LocalDateTime getDateTimeUTC() {
+    public String getDateTimeUTC() {
         return dateTimeUTC;
     }
 
-    public void setDateTimeUTC(LocalDateTime dateTimeUTC) {
-        this.dateTimeUTC = dateTimeUTC;
-    }
-
-    public Tap getTapType() {
+    public String getTapType() {
         return tapType;
-    }
-
-    public void setTapType(Tap tapType) {
-        this.tapType = tapType;
     }
 
     public String getStopId() {
         return stopId;
     }
 
-    public void setStopId(String stopId) {
-        this.stopId = stopId;
-    }
-
     public String getCompanyId() {
         return companyId;
-    }
-
-    public void setCompanyId(String companyId) {
-        this.companyId = companyId;
     }
 
     public String getBusID() {
         return busID;
     }
 
-    public void setBusID(String busID) {
-        this.busID = busID;
-    }
-
     public String getPan() {
         return pan;
-    }
-
-    public void setPan(String pan) {
-        this.pan = pan;
     }
 
     @Override
@@ -97,3 +75,4 @@ public class TravelRecord {
         return sb.toString();
     }
 }
+

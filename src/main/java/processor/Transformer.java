@@ -1,24 +1,25 @@
-package util;
+package processor;
 
-import DataObject.RawRecord;
-import DataObject.Tap;
-import DataObject.TravelRecord;
+import dataObject.RawRecord;
+import dataObject.StopID;
+import dataObject.Tap;
+import dataObject.TravelRecord;
 
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
-import Exception.TransformException;
+
+import exception.TransformException;
+import util.DateTimeUtil;
 
 /**
  * for transforming data from raw to objects with appropriate type
  */
 public class Transformer {
 
-    private static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern(Constant.DATE_TIME_FORMAT);
-
     /**
      * for transforming a list of raw records into a list of travel records
+     *
      * @param rawRecords
      * @return
      */
@@ -26,7 +27,7 @@ public class Transformer {
 
         List<TravelRecord> travelRecords = new ArrayList<>();
 
-        for(RawRecord raw: rawRecords) {
+        for (RawRecord raw : rawRecords) {
             try {
                 travelRecords.add(transform(raw));
             } catch (TransformException e) {
@@ -40,6 +41,7 @@ public class Transformer {
 
     /**
      * for a single object transformation
+     *
      * @param rawRecord
      * @return
      */
@@ -50,7 +52,7 @@ public class Transformer {
             travelRecord.setId(idTransform(rawRecord.getId()));
             travelRecord.setDateTimeUTC(dateTimeTransform(rawRecord.getDateTimeUTC()));
             travelRecord.setTapType(tapTransform(rawRecord.getTapType()));
-            travelRecord.setStopId(rawRecord.getStopId().trim());
+            travelRecord.setStopId(stopIdTransform(rawRecord.getStopId().trim()));
             travelRecord.setBusID(rawRecord.getBusID().trim());
             travelRecord.setCompanyId(rawRecord.getCompanyId().trim());
             travelRecord.setPan(rawRecord.getPan().trim());
@@ -58,7 +60,7 @@ public class Transformer {
             return travelRecord;
         } catch (TransformException e) {
             StringBuilder sb = new StringBuilder();
-            sb.append(getCurrentTime());
+            sb.append(DateTimeUtil.getCurrentTime());
             sb.append(" - ");
             sb.append("Failed to transform: ");
             sb.append(rawRecord.toString());
@@ -78,7 +80,7 @@ public class Transformer {
 
     private static LocalDateTime dateTimeTransform(String strDateTime) throws TransformException {
         try {
-            return LocalDateTime.parse(strDateTime.trim(), DATE_TIME_FORMATTER);
+            return DateTimeUtil.parseDateTimeStr(strDateTime.trim());
         } catch (Exception e) {
             throw new TransformException("Unable to transform Date Time");
         }
@@ -92,9 +94,12 @@ public class Transformer {
         }
     }
 
-    private static String getCurrentTime() {
-        LocalDateTime now = LocalDateTime.now();
-        return DATE_TIME_FORMATTER.format(now);
+    private static StopID stopIdTransform(String strStopId) throws TransformException {
+        try {
+            return StopID.valueOf(strStopId.toUpperCase().trim());
+        } catch (Exception e) {
+            throw new TransformException("Unable to transform StopID");
+        }
     }
 
 }
