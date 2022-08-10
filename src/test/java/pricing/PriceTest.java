@@ -1,11 +1,13 @@
 package pricing;
 
+import dataObject.StopID;
 import org.junit.Assert;
 import org.junit.Test;
 
 import static dataObject.StopID.STOP1;
 import static dataObject.StopID.STOP2;
 import static dataObject.StopID.STOP3;
+import static pricing.PricingTable.findLongestRoute;
 import static pricing.PricingTable.getFee;
 
 public class PriceTest {
@@ -33,4 +35,19 @@ public class PriceTest {
         Assert.assertEquals(expected23, actual32);
     }
 
+    @Test
+    public void testLongest2() {
+        StopID expected = STOP3;
+        StopID actual = findLongestRoute(STOP2);
+
+        Assert.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void testLongest3() {
+        StopID expected = STOP1;
+        StopID actual = findLongestRoute(STOP3);
+
+        Assert.assertEquals(expected, actual);
+    }
 }

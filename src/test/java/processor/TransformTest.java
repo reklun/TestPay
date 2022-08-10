@@ -1,4 +1,4 @@
-package util;
+package processor;
 
 import dataObject.RawRecord;
 import dataObject.StopID;
@@ -8,28 +8,27 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import handler.CSVReadHandler;
-import processor.Transformer;
+import util.DateTimeUtil;
 
 import java.io.FileNotFoundException;
-import java.net.URISyntaxException;
 import java.time.LocalDateTime;
 import java.util.List;
 
 public class TransformTest {
 
-    private final String csv = "src/test/resources/input-1.csv";
+    private final String csv = "src/test/resources/data/general/input-1.csv";
     private List<RawRecord> rawRecords;
     private List<TravelRecord> travelRecords;
 
     @Before
-    public void before() throws URISyntaxException, FileNotFoundException {
+    public void before() throws FileNotFoundException {
 
         rawRecords = CSVReadHandler.parseRecordsFromFile(csv);
         travelRecords = Transformer.transform(rawRecords);
     }
 
     @Test // testing the transformation of raw record
-    public void testRawParsing() throws URISyntaxException, FileNotFoundException {
+    public void testRawParsing() throws FileNotFoundException {
         int expectedRaw = 3;
         int expectedTravel = 2;
 

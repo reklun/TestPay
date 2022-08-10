@@ -16,20 +16,15 @@ import java.util.Map;
 /**
  * the main processor for this program
  */
-public class MainProcessor {
+public class WorkFlowProcessor {
 
-    private static final Logger LOGGER = LogManager.getLogger(MainProcessor.class);
+    private static final Logger LOGGER = LogManager.getLogger(WorkFlowProcessor.class);
 
-    public MainProcessor() {
+    public WorkFlowProcessor() {
 
     }
 
-    public void process() throws IOException {
-        LOGGER.info("Start of the program");
-
-        // loading input files from resources
-        String inputDir = Constant.INPUT_DIR;
-
+    public List<ResultRecord> process(String inputDir) throws IOException {
         // parsing raw data from csv files
         LOGGER.info("Start parsing");
         List<RawRecord> rawRecords = CSVReadHandler.parseRecordsFromDir(inputDir);
@@ -44,12 +39,12 @@ public class MainProcessor {
 
         // Generating a list of records
         LOGGER.info("Preparing output");
-        List<ResultRecord> results = ResultProcessor.buildResult(pairedMap);
+        return ResultProcessor.buildResult(pairedMap);
+    }
 
+    public void generateOutput(List<ResultRecord> results) throws IOException {
         // Write to CSV file
         LOGGER.info("Generating CSV output");
         CSVWriteHandler.csvWriter(results, Constant.OUTPUT_DIR + Constant.OUTPUT_FILE_NAME);
-
-        LOGGER.info("Program End");
     }
 }

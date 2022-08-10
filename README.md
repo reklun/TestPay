@@ -1,17 +1,34 @@
 # TestPay
 #-----------------------------------------------
+
 Run:
-1. Drop the CSV files under src/main/resources/input.
-2. Run the Worker.class, which is a main method.
-3. Get the output from src/main/resources/output.
+
+1. Drop the CSV files under `src/main/resources/input`. 
+   There's no validation on file names and data, assuming it to be right.
+   You can drop multiple files in the same directory.
+   
+2. Run the `Worker.class`, which is a main method.
+
+3. Get the output from `src/main/resources/output`.
 
 #-----------------------------------------------
+
+Test:
+`gradle build` will complete the tests
+Or Run Unit test per class. The most important test class is `WorkFlowProcessorTest`
+
+
+#-----------------------------------------------
+
 Log file:
-Config file under src/main/resources/log4j2.properties
-Log file can be found under log/app.log
+
+Config file under `src/main/resources/log4j2.properties`
+Log file can be found under `log/app.log`
 
 #-----------------------------------------------
+
 Assumptions:
+
 1. Everyone touch on when they get on board.
 2. There is a maximum time to force a touch off if a touch off is not happening. 
    Default to 4 hours defined in the Constant class.
