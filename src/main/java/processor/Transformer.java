@@ -64,8 +64,6 @@ public class Transformer {
             return travelRecord;
         } catch (TransformException e) {
             StringBuilder sb = new StringBuilder();
-            sb.append(DateTimeUtil.getCurrentTime());
-            sb.append(" - ");
             sb.append("Failed to transform: ");
             sb.append(rawRecord.toString());
             sb.append(" - ");
