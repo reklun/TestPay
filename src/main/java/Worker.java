@@ -17,7 +17,7 @@ public class Worker {
 
         LOGGER.info("Start of the program");
         WorkFlowProcessor main = new WorkFlowProcessor();
-        List<ResultRecord> results =  main.process(inputDir);
+        List<ResultRecord> results = main.process(inputDir);
         main.generateOutput(results);
         LOGGER.info("Program End");
     }

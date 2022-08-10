@@ -2,7 +2,7 @@ package dataObject;
 
 /**
  * This is a CSV POJO Object, which the variable name needs to match the header
- *
+ * <p>
  * Example
  * Started, Finished, DurationSecs, FromStopId, ToStopId, ChargeAmount, CompanyId, BusID, PAN, Status
  * 22-01-2018 13:00:00, 22-01-2018 13:05:00, 900, Stop1, Stop2, $3.25, Company1, B37, 5500005555555559, COMPLETED
@@ -19,6 +19,7 @@ public class ResultRecord {
 
     // for building the header line with predefined fields
     public static String HEADER;
+
     public static String getCSVHeader() {
         if (HEADER == null) {
             StringBuilder sb = new StringBuilder();

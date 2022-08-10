@@ -4,17 +4,20 @@
 Run:
 
 1. Drop the CSV files under `src/main/resources/input`. 
-   There's no validation on file names and data, assuming it to be right.
+   There's no validation on file names and data inside, assuming all to be right.
    You can drop multiple files in the same directory.
    
 2. Run the `Worker.class`, which is a main method.
 
 3. Get the output from `src/main/resources/output`.
+   Default file name as `trips.csv`
 
 #-----------------------------------------------
 
 Test:
+
 `gradle build` will complete the tests
+
 Or Run Unit test per class. The most important test class is `WorkFlowProcessorTest`
 
 
