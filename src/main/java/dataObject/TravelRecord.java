@@ -98,21 +98,6 @@ public class TravelRecord {
         return false;
     }
 
-//    /**
-//     * Pairing conditions adding a time contraint on top
-//     * @param TravelRecord
-//     * @return
-//     */
-//    public boolean isTightPairing(TravelRecord that) {
-//        if (isPairing(that)) {
-//            if (that.dateTimeUTC.isBefore(this.dateTimeUTC.plusHours(Constant.EXPIRY))) {
-//                return true;
-//            }
-//        }
-//
-//        return false;
-//    }
-
     /**
      * for generating a record id
      *

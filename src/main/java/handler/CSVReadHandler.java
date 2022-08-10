@@ -1,7 +1,9 @@
-package processor;
+package handler;
 
 import dataObject.RawRecord;
 import com.opencsv.bean.CsvToBeanBuilder;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -12,7 +14,9 @@ import java.util.List;
 /**
  * CSV parser from raw csv file
  */
-public class CSVParser {
+public class CSVReadHandler {
+
+    private static final Logger LOGGER = LogManager.getLogger(CSVReadHandler.class);
 
     /**
      * loop through a list of files and return all records from all files
@@ -27,10 +31,13 @@ public class CSVParser {
         File folder = new File(dirPath);
         File[] listOfFiles = folder.listFiles();
 
+        LOGGER.info("Parsed directory: " + dirPath);
+
         for (int i = 0; i < listOfFiles.length; i++) {
             if (listOfFiles[i].isFile()) {
-                System.out.println("File " + listOfFiles[i].getName());
                 travelRecords.addAll(parseRecordsFromFile(listOfFiles[i].getAbsolutePath()));
+
+                LOGGER.info("Parsed File: " + listOfFiles[i].getName());
             }
         }
 

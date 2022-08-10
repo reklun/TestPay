@@ -34,16 +34,6 @@ public class PricingTable {
         }}, 7.30);
     }
 
-    // Or concat the stop strings as keys
-//    static {
-//        FEE_MAP.put("Stop1Stop2", 3.25);
-//        FEE_MAP.put("Stop2Stop1", 3.25);
-//        FEE_MAP.put("Stop2Stop3", 5.50);
-//        FEE_MAP.put("Stop3Stop2", 5.50);
-//        FEE_MAP.put("Stop1Stop3", 7.30);
-//        FEE_MAP.put("Stop3Stop1", 7.30);
-//    };
-
     /**
      * return the fee based on the stops
      *
@@ -63,6 +53,35 @@ public class PricingTable {
             add(stop);
         }};
         return FEE_MAP.get(key);
+    }
+
+    /**
+     * for any given starting stop, return the ending stop with highest price
+     *
+     * @return
+     */
+    public static StopID findLongestRoute(StopID startStop) {
+
+        StopID endStop = startStop;
+        Double fee = 0.0;
+
+        for (Map.Entry<Set<StopID>, Double> entry : FEE_MAP.entrySet()) {
+            // for each item on price table
+            // get the combinations of stops and corresponding fee
+            Set<StopID> stops = new HashSet<>(entry.getKey());
+            Double feeForThisTrip = entry.getValue();
+
+            // if a stop is in the set, store the stopId and fee
+            if (stops.contains(startStop) && feeForThisTrip > fee) {
+                // only two stops in each item. pop the start and get the remanining one
+                stops.remove(startStop);
+                endStop = stops.iterator().next();
+
+                fee = feeForThisTrip;
+            }
+        }
+
+        return endStop;
     }
 
 }

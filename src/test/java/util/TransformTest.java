@@ -7,8 +7,7 @@ import dataObject.TravelRecord;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import processor.CSVParser;
-import processor.ResourceLoader;
+import handler.CSVReadHandler;
 import processor.Transformer;
 
 import java.io.FileNotFoundException;
@@ -25,7 +24,7 @@ public class TransformTest {
     @Before
     public void before() throws URISyntaxException, FileNotFoundException {
 
-        rawRecords = CSVParser.parseRecordsFromFile(csv);
+        rawRecords = CSVReadHandler.parseRecordsFromFile(csv);
         travelRecords = Transformer.transform(rawRecords);
     }
 
@@ -34,7 +33,7 @@ public class TransformTest {
         int expectedRaw = 3;
         int expectedTravel = 2;
 
-        List<RawRecord> rawRecords = CSVParser.parseRecordsFromFile(csv);
+        List<RawRecord> rawRecords = CSVReadHandler.parseRecordsFromFile(csv);
         Assert.assertEquals(expectedRaw, rawRecords.size());
 
         List<TravelRecord> travelRecords = Transformer.transform(rawRecords);

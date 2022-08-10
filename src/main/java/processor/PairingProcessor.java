@@ -2,6 +2,8 @@ package processor;
 
 import dataObject.Tap;
 import dataObject.TravelRecord;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import util.DateTimeUtil;
 
 import java.util.ArrayList;
@@ -13,6 +15,8 @@ import java.util.Map;
  * This class is for pairing the result extracted from CSV file
  */
 public class PairingProcessor {
+
+    private static final Logger LOGGER = LogManager.getLogger(PairingProcessor.class);
 
     /**
      * pairing the tap on and off records and return a map
@@ -54,7 +58,7 @@ public class PairingProcessor {
             } else {
                 // this is a tap OFF so look for a pairing target
                 if (paired.get(key) == null) {
-                    // TODO this is an error. A tap OFF without a tap ON
+                    LOGGER.error("Tap OFF record unable to find a Tap ON record " + travelRecord.toString());
                 } else {
                     // if it is found, put it to the closest time record
                     Map<Long, List<TravelRecord>> pairingInner = paired.get(key);
@@ -64,6 +68,8 @@ public class PairingProcessor {
                 }
             }
         }
+
+        LOGGER.info("Pairing finished");
 
         return paired;
     }

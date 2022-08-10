@@ -10,12 +10,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 import exception.TransformException;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import util.DateTimeUtil;
 
 /**
  * for transforming data from raw to objects with appropriate type
  */
 public class Transformer {
+
+    private static final Logger LOGGER = LogManager.getLogger(Transformer.class);
 
     /**
      * for transforming a list of raw records into a list of travel records
@@ -31,8 +35,8 @@ public class Transformer {
             try {
                 travelRecords.add(transform(raw));
             } catch (TransformException e) {
-                // TODO report a log to investigate the failure of transformation
-                System.out.println(e.getMessage());
+                // report a log to investigate the failure of transformation
+                LOGGER.error(e.getMessage());
             }
         }
 

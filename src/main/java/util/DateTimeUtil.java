@@ -37,4 +37,26 @@ public class DateTimeUtil {
         return localDateTime.toEpochSecond(ZoneOffset.UTC);
     }
 
+    /**
+     * return a date time in defined format here
+     *
+     * @param localDateTime
+     * @return
+     */
+    public static String localDateTimeToString(LocalDateTime localDateTime) {
+        return DATE_TIME_FORMATTER.format(localDateTime);
+    }
+
+    /**
+     * calculate the difference between the two local datetime and return a string
+     *
+     * @param start
+     * @param stop
+     * @return
+     */
+    public static String getDifference(LocalDateTime start, LocalDateTime stop) {
+        Long diff = toEpoch(stop) - toEpoch(start);
+        return diff.toString();
+    }
+
 }
