@@ -24,6 +24,13 @@ public class WorkFlowProcessor {
 
     }
 
+    /**
+     * This part can be treated as the core functionality and exposed as an API for example
+     *
+     * @param inputDir
+     * @return
+     * @throws IOException
+     */
     public List<ResultRecord> process(String inputDir) throws IOException {
         // parsing raw data from csv files
         LOGGER.info("Start parsing");
@@ -42,6 +49,13 @@ public class WorkFlowProcessor {
         return ResultProcessor.buildResult(pairedMap);
     }
 
+    /**
+     * This part is simply for exporting as one of the required format
+     * As long as we have the result list, we can have other usecase for the result
+     *
+     * @param results
+     * @throws IOException
+     */
     public void generateOutput(List<ResultRecord> results) throws IOException {
         // Write to CSV file
         LOGGER.info("Generating CSV output");
