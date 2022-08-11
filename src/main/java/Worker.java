@@ -18,7 +18,11 @@ public class Worker {
         LOGGER.info("Start of the program");
         WorkFlowProcessor main = new WorkFlowProcessor();
         List<ResultRecord> results = main.process(inputDir);
-        main.generateOutput(results);
+
+        // can expose these variables to other interface
+        String outputDir = Constant.OUTPUT_DIR;
+        String outputFileName = Constant.OUTPUT_FILE_NAME;
+        main.generateOutput(results, outputDir, outputFileName);
         LOGGER.info("Program End");
     }
 

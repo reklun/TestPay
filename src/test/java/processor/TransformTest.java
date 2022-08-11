@@ -16,7 +16,7 @@ import java.util.List;
 
 public class TransformTest {
 
-    private final String csv = "src/test/resources/data/general/input-1.csv";
+    private final String csv = "src/test/resources/general/input-1.csv";
     private List<RawRecord> rawRecords;
     private List<TravelRecord> travelRecords;
 

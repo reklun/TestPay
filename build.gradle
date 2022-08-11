@@ -1,3 +1,5 @@
+import java.lang.reflect.Method
+
 plugins {
     id 'java'
 }
@@ -20,3 +22,15 @@ dependencies {
 
     testCompile group: 'junit', name: 'junit', version: '4.12'
 }
+
+task runTest(type: Test) {
+
+    useJUnit()
+
+    systemProperty 'infile', System.getProperty('infile')
+
+    filter {
+        includeTestsMatching "processor.WorkFlowProcessorTestByInput"
+    }
+}
+

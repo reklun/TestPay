@@ -10,16 +10,6 @@ public class DateTimeUtil {
     public static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern(DATE_TIME_FORMAT);
 
     /**
-     * return the current time in string
-     *
-     * @return
-     */
-    public static String getCurrentTime() {
-        LocalDateTime now = LocalDateTime.now();
-        return DATE_TIME_FORMATTER.format(now);
-    }
-
-    /**
      * change string into local date time object
      *
      * @return

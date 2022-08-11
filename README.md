@@ -16,10 +16,14 @@ Run:
 
 Test:
 
+Running Unit Test
 `gradle build` will complete the tests
+Or Run `./gradlew test`. The most important test class is `WorkFlowProcessorTest`
 
-Or Run Unit test per class. The most important test class is `WorkFlowProcessorTest`
-
+Run Test for test files and generate output files
+By providing the path of the predefined test/data location, one can add more tests 
+and generate output for each case
+`./gradlew runTest -Dinfile=/Users/chester/development/repo/TestPay/src/test/resources/data/`
 
 #-----------------------------------------------
 

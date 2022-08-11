@@ -17,7 +17,7 @@ import java.nio.file.Paths;
 import java.util.List;
 
 /**
- * for writing Java beans into CSV fileå
+ * for writing Java beans into CSV files
  */
 public class CSVWriteHandler {
 
@@ -33,12 +33,10 @@ public class CSVWriteHandler {
      * @return
      */
     private static StatefulBeanToCsv getBeanWriter(Writer writer) {
-        if (beanWriter == null) {
-            StatefulBeanToCsvBuilder<ResultRecord> builder = new StatefulBeanToCsvBuilder(writer);
-            beanWriter = builder.withMappingStrategy(getTripsMappingStrategy())
-                    .withOrderedResults(false)
-                    .withQuotechar(CSVWriter.NO_QUOTE_CHARACTER).build();
-        }
+        StatefulBeanToCsvBuilder<ResultRecord> builder = new StatefulBeanToCsvBuilder(writer);
+        beanWriter = builder.withMappingStrategy(getTripsMappingStrategy())
+                .withOrderedResults(false)
+                .withQuotechar(CSVWriter.NO_QUOTE_CHARACTER).build();
 
         return beanWriter;
     }
@@ -67,7 +65,6 @@ public class CSVWriteHandler {
     public static void csvWriter(List<ResultRecord> results, String filePath) throws IOException {
 
         LOGGER.info("Starting writing to " + filePath);
-
         try (Writer writer = Files.newBufferedWriter(Paths.get(filePath))) {
 
             // add a line of header before printing the records

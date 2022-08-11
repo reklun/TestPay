@@ -7,7 +7,6 @@ import handler.CSVReadHandler;
 import handler.CSVWriteHandler;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import util.Constant;
 
 import java.io.IOException;
 import java.util.List;
@@ -54,11 +53,13 @@ public class WorkFlowProcessor {
      * As long as we have the result list, we can have other usecase for the result
      *
      * @param results
+     * @param outputPath
+     * @param fileName
      * @throws IOException
      */
-    public void generateOutput(List<ResultRecord> results) throws IOException {
+    public void generateOutput(List<ResultRecord> results, String outputPath, String fileName) throws IOException {
         // Write to CSV file
         LOGGER.info("Generating CSV output");
-        CSVWriteHandler.csvWriter(results, Constant.OUTPUT_DIR + Constant.OUTPUT_FILE_NAME);
+        CSVWriteHandler.csvWriter(results, outputPath + fileName);
     }
 }
